@@ -1,4 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+    --clr-primary-400: hsl(158, 36%, 37%);
+    --clr-primary-500: hsl(158, 36%, 20%);
+    --clr-secondary-200: hsl(30, 38%, 92%);
+    --clr-nutral-900: hsl(212, 21%, 14%);
+    --clr-nutral-400: hsl(228, 12%, 48%);
+    --clr-nutral-100: hsl(0, 0%, 100%);
+
+    --fw-regular: 500;
+    --fw-bold: 700;
+
+    --ff-accent: "Fraunces", serif;
+    --ff-base: "Montserrat", serif;
+}
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -13,7 +26,7 @@
 
 body {
     /* 3. Add accessible line-height */
-    line-height: 1.5;
+    line-height: 1.7;
     /* 4. Improve text rendering */
     -webkit-font-smoothing: antialiased;
 }
@@ -59,11 +72,96 @@ h5,
 h6 {
     text-wrap: balance;
 }
-
-/*
-  9. Create a root stacking context
-*/
-#root,
-#__next {
-    isolation: isolate;
+h1,
+h2,
+h3 {
+    line-height: 1.1;
+}
+/* general styling */
+body {
+    font-family: var(--ff-base);
+    font-weight: var(--fw-regular);
+    color: var(--clr-nutral-400);
+    font-size: 0.875rem;
+    background-color: var(--clr-secondary-200);
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    margin: 1rem;
+}
+/* utilities */
+.flex-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.sr:not(:focus):not(:active) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.button {
+    cursor: pointer;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+    display: inline-flex;
+    gap: 0.725rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-primary-400);
+    color: var(--clr-nutral-100);
+    font-weight: var(--fw-bold);
+    border: 0.925rem;
+    border-radius: 0.5rem;
+}
+.button[data-icon="shopping-cart"]::before {
+    content: "";
+    background-image: url(images/icon-cart.svg);
+    width: 15px;
+    height: 16px;
+}
+.button:is(:hover, :focus) {
+    background-color: var(--clr-primary-500);
+}
+/* product */
+.product {
+    /* only available for it child elements */
+    --content-padding: 1.5rem;
+    --content-spacing: 1rem;
+    background-color: var(--clr-nutral-100);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: grid;
+    max-width: 600px;
+}
+@media (min-width: 600px) {
+    .product {
+        --content-padding: 2rem;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.product__content {
+    padding: var(--content-padding);
+    display: grid;
+    gap: var(--content-spacing);
+}
+.product__category {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 0.8125rem;
+}
+.product__title {
+    font-size: 2rem;
+    font-family: var(--ff-accent);
+    color: var(--clr-nutral-900);
+}
+.product__price {
+    font-size: 2rem;
+    font-family: var(--ff-accent);
+    color: var(--clr-primary-400);
 }
